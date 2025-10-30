@@ -1,5 +1,5 @@
 {
-  "name": "yourname/command-module-generator",
+  "name": "eng-mohamedemad-dev/command-module-generator",
   "description": "Smart Laravel artisan module generator package with full config and stubs.",
   "type": "library",
   "license": "MIT",
