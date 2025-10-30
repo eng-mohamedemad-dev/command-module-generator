@@ -41,10 +41,7 @@ class MakeModuleCommand extends Command
             '--model' => "App\\Models\\{$name}",
         ]);
 
-        // 3. Requests - Create custom Request that extends BaseRequest (BEFORE Controller)
-        $this->createRequest($name);
-
-        // 4. Controller
+        // 3. Controller
         if ($type === 'api') {
         $this->call('make:controller', [
             'name' => "Api/{$name}Controller",
@@ -57,7 +54,7 @@ class MakeModuleCommand extends Command
             ]);
         }
 
-        // 5. Resource (api only)
+        // 4. Resource (api only)
         if ($type === 'api') {
         $this->call('make:resource', [
             'name' => "{$name}Resource"
@@ -119,6 +116,10 @@ class MakeModuleCommand extends Command
         // Write Controller CRUD code (service + request)
         $viewPath = $type === 'web' ? ($this->option('path') ?: null) : null;
         $this->writeControllerCrud($name, $type, $viewPath);
+
+        // ⚠️ IMPORTANT: Override Request AFTER writeControllerCrud
+        // Laravel 12 auto-creates Request when Controller imports it, so we override here
+        $this->createRequest($name);
 
         // Bind service to interface only when no repo
         if (!$this->option('repo')) {
@@ -701,15 +702,11 @@ PHP;
 
     /**
      * Create Request file from stub that extends BaseRequest
+     * This will overwrite Laravel's default Request to ensure BaseRequest inheritance
      */
     protected function createRequest(string $name): void
     {
         $requestPath = app_path("Http/Requests/{$name}Request.php");
-        
-        if (File::exists($requestPath) && !$this->option('force')) {
-            $this->line("Request exists, skipping: {$name}Request");
-            return;
-        }
 
         $stubPath = __DIR__ . '/../../stubs/Request.single.stub';
         
@@ -729,7 +726,7 @@ PHP;
         File::ensureDirectoryExists(app_path('Http/Requests'));
         File::put($requestPath, $content);
         
-        $this->info("Request [app/Http/Requests/{$name}Request.php] created successfully.");
+        $this->info("Request [app/Http/Requests/{$name}Request.php] created successfully (extends BaseRequest).");
     }
 }
 
