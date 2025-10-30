@@ -8,3 +8,4 @@ class DummyClass extends Model
 {
     // Fillable attributes, casts, relations ...
 }
+

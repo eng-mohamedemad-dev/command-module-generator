@@ -60,3 +60,4 @@ class DummyClass extends Controller
         return $this->success('Deleted');
     }
 }
+

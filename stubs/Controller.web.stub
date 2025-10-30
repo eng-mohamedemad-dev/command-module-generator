@@ -73,3 +73,4 @@ class DummyClass extends Controller
         return redirect()->route('DummyRouteName.index')->with('success', 'تم الحذف بنجاح');
     }
 }
+

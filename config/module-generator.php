@@ -26,3 +26,4 @@ return [
     'store_request_name' => 'StoreRequest', // مثال CarStoreRequest
     'update_request_name' => 'UpdateRequest', // مثال CarUpdateRequest
 ];
+

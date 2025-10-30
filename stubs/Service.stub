@@ -11,3 +11,4 @@ class DummyClass implements DummyInterface
     }
     // اكتب دوال CRUD أو أي خدمات هنا
 }
+

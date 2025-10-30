@@ -8,3 +8,4 @@ class DummyClass implements DummyInterface
     public function __construct(/* inject model here */) { /* ... */ }
     // اكتب دوال CRUD هنا كما هو معرف بالانترفيس وأضف التوثيقات
 }
+

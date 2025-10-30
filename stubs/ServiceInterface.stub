@@ -6,3 +6,4 @@ interface DummyClass
 {
     // تعريف العمليات المطلوبة للخدمة (CRUD methods ...)
 }
+

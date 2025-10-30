@@ -1,12 +1,23 @@
 {
   "name": "eng-mohamedemad-dev/command-module-generator",
-  "description": "Smart Laravel artisan module generator package with full config and stubs.",
+  "description": "Smart Laravel artisan module generator package - Generates complete modules (Model, Controller, Service, Repository, Policy, Observer, Views, Routes) with full automation and best practices",
   "type": "library",
   "license": "MIT",
+  "keywords": ["laravel", "artisan", "generator", "module", "crud", "scaffold"],
+  "authors": [
+    {
+      "name": "Mohamed Emad",
+      "email": "mohamedelghool671@gmail.com"
+    }
+  ],
   "autoload": {
     "psr-4": {
       "CommandModuleGenerator\\": "src/"
     }
+  },
+  "require": {
+    "php": ">=8.2",
+    "illuminate/support": "^11.0|^12.0"
   },
   "extra": {
     "laravel": {
@@ -14,5 +25,7 @@
         "CommandModuleGenerator\\CommandModuleGeneratorServiceProvider"
       ]
     }
-  }
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true
 }
