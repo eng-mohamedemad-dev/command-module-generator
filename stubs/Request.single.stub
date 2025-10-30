@@ -2,7 +2,7 @@
 
 namespace DummyNamespace;
 
-use App\Http\Requests\BaseRequest;
+use CommandModuleGenerator\Http\Requests\BaseRequest;
 
 class DummyClass extends BaseRequest
 {
