@@ -41,7 +41,10 @@ class MakeModuleCommand extends Command
             '--model' => "App\\Models\\{$name}",
         ]);
 
-        // 3. Controller
+        // 3. Requests - Create custom Request that extends BaseRequest (BEFORE Controller)
+        $this->createRequest($name);
+
+        // 4. Controller
         if ($type === 'api') {
         $this->call('make:controller', [
             'name' => "Api/{$name}Controller",
@@ -53,14 +56,6 @@ class MakeModuleCommand extends Command
                 '--resource' => true,
             ]);
         }
-
-        // 4. Requests (فولدر مرتب Car/StoreCarRequest , Car/UpdateCarRequest)
-        $this->call('make:request', [
-            'name' => "{$name}Request"
-        ]);
-        // $this->call('make:request', [
-        //     'name' => "{$name}/Update{$name}Request"
-        // ]);
 
         // 5. Resource (api only)
         if ($type === 'api') {
@@ -703,4 +698,38 @@ PHP;
             1
         );
     }
+
+    /**
+     * Create Request file from stub that extends BaseRequest
+     */
+    protected function createRequest(string $name): void
+    {
+        $requestPath = app_path("Http/Requests/{$name}Request.php");
+        
+        if (File::exists($requestPath) && !$this->option('force')) {
+            $this->line("Request exists, skipping: {$name}Request");
+            return;
+        }
+
+        $stubPath = __DIR__ . '/../../stubs/Request.single.stub';
+        
+        if (!File::exists($stubPath)) {
+            $this->error("Request stub not found at: {$stubPath}");
+            return;
+        }
+
+        $stub = File::get($stubPath);
+        
+        $content = str_replace(
+            ['DummyNamespace', 'DummyClass'],
+            ['App\Http\Requests', "{$name}Request"],
+            $stub
+        );
+
+        File::ensureDirectoryExists(app_path('Http/Requests'));
+        File::put($requestPath, $content);
+        
+        $this->info("Request [app/Http/Requests/{$name}Request.php] created successfully.");
+    }
 }
+
