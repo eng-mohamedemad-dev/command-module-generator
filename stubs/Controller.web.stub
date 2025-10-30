@@ -1,0 +1,75 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Http\Controllers\Controller;
+use App\Traits\ApiResponse;
+use DummyServiceNs\DummyService;
+use DummyRequestStoreNs\DummyStoreRequest;
+use DummyRequestUpdateNs\DummyUpdateRequest;
+use Illuminate\Http\Request;
+use DummyModelNs\DummyModel;
+
+class DummyClass extends Controller
+{
+    use ApiResponse;
+    protected DummyService $service;
+    public function __construct(DummyService $service)
+    {
+        $this->service = $service;
+        // هنا يمكن إضافة middleware وصلاحيات
+    }
+    /**
+     * كل العناصر
+     */
+    public function index()
+    {
+        $all = $this->service->all();
+        return view('DummyViewsFolder.index', ['models' => $all]);
+    }
+    /**
+     * صفحة إنشاء جديد
+     */
+    public function create()
+    {
+        return view('DummyViewsFolder.create');
+    }
+    /**
+     * تخزين جديد
+     */
+    public function store(DummyStoreRequest $request)
+    {
+        $created = $this->service->create($request->validated());
+        return redirect()->route('DummyRouteName.index')->with('success', 'تم الإنشاء بنجاح');
+    }
+    /**
+     * صفحة تعديل
+     */
+    public function edit(DummyModel $model)
+    {
+        return view('DummyViewsFolder.edit', compact('model'));
+    }
+    /**
+     * تحديث البيانات
+     */
+    public function update(DummyUpdateRequest $request, DummyModel $model)
+    {
+        $updated = $this->service->update($model, $request->validated());
+        return redirect()->route('DummyRouteName.index')->with('success', 'تم التحديث بنجاح');
+    }
+    /**
+     * تفاصيل عنصر
+     */
+    public function show(DummyModel $model)
+    {
+        return view('DummyViewsFolder.show', compact('model'));
+    }
+    /**
+     * حذف عنصر
+     */
+    public function destroy(DummyModel $model)
+    {
+        $this->service->delete($model);
+        return redirect()->route('DummyRouteName.index')->with('success', 'تم الحذف بنجاح');
+    }
+}

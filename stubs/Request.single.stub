@@ -1,0 +1,19 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Http\Requests\BaseRequest;
+
+class DummyClass extends BaseRequest
+{
+    /**
+     * قواعد التحقق
+     * Rules
+     */
+    public function rules(): array
+    {
+        return [
+            // request fields...
+        ];
+    }
+}

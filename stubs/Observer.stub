@@ -1,0 +1,30 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Models\DummyModel;
+
+class DummyClass
+{
+    /**
+     * حدث عند الإنشاء
+     */
+    public function created(DummyModel $model)
+    {
+        //
+    }
+    /**
+     * حدث عند التحديث
+     */
+    public function updated(DummyModel $model)
+    {
+        //
+    }
+    /**
+     * حدث عند الحذف
+     */
+    public function deleted(DummyModel $model)
+    {
+        //
+    }
+}

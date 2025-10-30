@@ -1,0 +1,13 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass implements DummyInterface
+{
+    // خدمات الموديول: DummyModule
+    public function __construct()
+    {
+        // Inject repo/interface/model here if needed
+    }
+    // اكتب دوال CRUD أو أي خدمات هنا
+}

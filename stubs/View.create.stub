@@ -1,0 +1,9 @@
+{{-- Blade create template --}}
+
+@extends('layouts.app')
+@section('content')
+<div class="container">
+    <h1>إضافة {{ snake_case_model }}</h1>
+    {{-- نموذج الإدخال هنا --}}
+</div>
+@endsection

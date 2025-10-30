@@ -1,0 +1,9 @@
+{{-- Blade show template --}}
+
+@extends('layouts.app')
+@section('content')
+<div class="container">
+    <h1>تفاصيل {{ snake_case_model }}</h1>
+    {{-- تفاصيل العنصر هنا --}}
+</div>
+@endsection

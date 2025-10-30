@@ -1,0 +1,10 @@
+<?php
+
+namespace DummyNamespace;
+
+class DummyClass implements DummyInterface
+{
+    protected $model;
+    public function __construct(/* inject model here */) { /* ... */ }
+    // اكتب دوال CRUD هنا كما هو معرف بالانترفيس وأضف التوثيقات
+}

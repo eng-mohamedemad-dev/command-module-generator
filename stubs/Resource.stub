@@ -1,0 +1,21 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class DummyClass extends JsonResource
+{
+    /**
+     * تحويل الريسورس لمصفوفة
+     * Transform the resource into an array
+     */
+    public function toArray(
+        $request
+    ) {
+        return [
+            // map resource data attributes here
+            // 'id' => $this->id,
+        ];
+    }
+}

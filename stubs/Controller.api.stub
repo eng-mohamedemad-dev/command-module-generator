@@ -1,0 +1,62 @@
+<?php
+
+namespace DummyNamespace;
+
+use App\Http\Controllers\Controller;
+use App\Traits\ApiResponse;
+use DummyServiceNs\DummyService;
+use DummyResourceNs\DummyResource;
+use DummyRequestStoreNs\DummyStoreRequest;
+use DummyRequestUpdateNs\DummyUpdateRequest;
+use Illuminate\Http\Request;
+use DummyModelNs\DummyModel;
+
+class DummyClass extends Controller
+{
+    use ApiResponse;
+    protected DummyService $service;
+    public function __construct(DummyService $service)
+    {
+        $this->service = $service;
+        // ضع هنا أي middleware او صلاحيات
+    }
+    /**
+     * عرض كل العناصر (Index)
+     */
+    public function index()
+    {
+        $all = $this->service->all();
+        return $this->success('Data fetched', DummyResource::collection($all));
+    }
+    /**
+     * عرض عنصر مفرد (Show)
+     */
+    public function show(DummyModel $model)
+    {
+        return $this->success('Details', new DummyResource($model));
+    }
+    /**
+     * تخزين بيانات جديدة (Store)
+     */
+    public function store(DummyStoreRequest $request)
+    {
+        $created = $this->service->create($request->validated());
+        return $this->success('Created', new DummyResource($created), 201);
+    }
+    /**
+     * تحديث عنصر (Update)
+     */
+    public function update(DummyUpdateRequest $request, DummyModel $model)
+    {
+        $updated = $this->service->update($model, $request->validated());
+        return $this->success('Updated', new DummyResource($updated));
+    }
+    /**
+     * حذف عنصر (Destroy)
+     */
+    public function destroy(DummyModel $model)
+    {
+        $this->service->delete($model);
+        return $this->success('Deleted');
+    }
+}

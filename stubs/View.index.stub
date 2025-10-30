@@ -1,0 +1,9 @@
+{{-- Blade index template --}}
+
+@extends('layouts.app')
+@section('content')
+<div class="container">
+    <h1>قائمة {{ snake_case_model }}</h1>
+    {{-- جدول البيانات هنا --}}
+</div>
+@endsection
